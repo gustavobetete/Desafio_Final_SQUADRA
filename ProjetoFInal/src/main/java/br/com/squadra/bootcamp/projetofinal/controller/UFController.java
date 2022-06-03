@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.projetofinal.controller;
 
 import br.com.squadra.bootcamp.projetofinal.constants.Sigla;
 import br.com.squadra.bootcamp.projetofinal.dto.UFDto;
+import br.com.squadra.bootcamp.projetofinal.dto.UFFormAtualizarDto;
 import br.com.squadra.bootcamp.projetofinal.dto.UFFormDto;
 import br.com.squadra.bootcamp.projetofinal.entities.UF;
 import br.com.squadra.bootcamp.projetofinal.service.UFService;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @RestController
@@ -37,5 +39,16 @@ public class UFController {
     public ResponseEntity<Page<UFDto>> listarUF(@PageableDefault(sort = "codigoUF", direction = Sort.Direction.ASC) Pageable paginacao
             , @RequestParam(required = false) Sigla sigla, @RequestParam(required = false) Long codigoUF){
         return ResponseEntity.ok().body(ufService.listarUF(paginacao, sigla, codigoUF));
+    }
+
+    @PutMapping
+    @Transactional
+    public ResponseEntity<List<UFDto>> atualizar(@RequestBody @Valid UFFormAtualizarDto ufFormDto){
+        return ResponseEntity.ok().body(ufService.atualizar(ufFormDto));
+    }
+
+    @DeleteMapping(path = "/{codigoUF}")
+    public ResponseEntity<List<UFDto>> delete(@PathVariable Long codigoUF) {
+        return ResponseEntity.ok().body(ufService.delete(codigoUF));
     }
 }

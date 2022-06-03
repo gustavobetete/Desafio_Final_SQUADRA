@@ -2,6 +2,7 @@ package br.com.squadra.bootcamp.projetofinal.service;
 
 import br.com.squadra.bootcamp.projetofinal.constants.Sigla;
 import br.com.squadra.bootcamp.projetofinal.dto.UFDto;
+import br.com.squadra.bootcamp.projetofinal.dto.UFFormAtualizarDto;
 import br.com.squadra.bootcamp.projetofinal.dto.UFFormDto;
 import br.com.squadra.bootcamp.projetofinal.repository.UFRepository;
 import org.springframework.data.domain.Page;
@@ -14,4 +15,8 @@ public interface UFService {
     List<UFDto> inserir(UFFormDto ufFormDto);
     Page<UFDto> listarUF(Pageable paginacao, Sigla sigla, Long codigoUF);
 
+    List<UFDto> atualizar(UFFormAtualizarDto ufFormDto);
+
+
+    List<UFDto> delete(Long codigoUF);
 }
