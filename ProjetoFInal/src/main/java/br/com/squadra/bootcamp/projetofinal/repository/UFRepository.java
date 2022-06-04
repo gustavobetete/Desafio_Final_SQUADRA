@@ -9,6 +9,7 @@ import java.util.Optional;
 
 public interface UFRepository extends JpaRepository<UF, Long> {
 
-
     Optional<UF> findByNome(String nome);
+
+    Optional<UF> findByCodigoUF(Long codigoUF);
 }

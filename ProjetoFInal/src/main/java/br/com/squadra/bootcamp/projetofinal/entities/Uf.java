@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "TB_UF")
 @Data
@@ -23,4 +24,7 @@ public class UF {
     @Enumerated(EnumType.STRING)
     private Sigla sigla;
     private int status;
+
+//    @OneToMany(mappedBy = "uf")
+//    private List<Municipio> municipio;
 }
