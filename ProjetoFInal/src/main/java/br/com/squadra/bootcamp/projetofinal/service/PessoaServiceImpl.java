@@ -3,9 +3,11 @@ package br.com.squadra.bootcamp.projetofinal.service;
 import br.com.squadra.bootcamp.projetofinal.config.objectNotFound.ObjectNotFoundExceptions;
 import br.com.squadra.bootcamp.projetofinal.config.unauthorized.UnauthorizedExceptions;
 import br.com.squadra.bootcamp.projetofinal.dto.*;
+import br.com.squadra.bootcamp.projetofinal.entities.Endereco;
 import br.com.squadra.bootcamp.projetofinal.entities.Municipio;
 import br.com.squadra.bootcamp.projetofinal.entities.Pessoa;
 import br.com.squadra.bootcamp.projetofinal.entities.UF;
+import br.com.squadra.bootcamp.projetofinal.repository.EnderecoRepository;
 import br.com.squadra.bootcamp.projetofinal.repository.MunicipioRepository;
 import br.com.squadra.bootcamp.projetofinal.repository.PessoaRepository;
 import br.com.squadra.bootcamp.projetofinal.repository.UFRepository;
@@ -27,8 +29,6 @@ public class PessoaServiceImpl implements PessoaService{
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    @Autowired
-    private UFRepository ufRepository;
 
     @Autowired
     private ModelMapper modelMapper;
@@ -38,7 +38,6 @@ public class PessoaServiceImpl implements PessoaService{
         Pessoa pessoa = modelMapper.map(pessoaFormDto, Pessoa.class);
         pessoa.setNome(pessoa.getNome().toUpperCase());
         pessoa.setSobrenome(pessoa.getSobrenome().toUpperCase());
-//        Optional<UF> uf = ufRepository.findByCodigoUF(pessoa.getCodigoUF()); precis fazer o endereço primeiro
 
         Optional<Pessoa> optionalPessoa = pessoaRepository.findByLogin(pessoa.getLogin());
         if(optionalPessoa.isPresent()){
