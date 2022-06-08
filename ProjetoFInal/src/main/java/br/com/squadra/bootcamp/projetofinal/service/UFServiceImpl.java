@@ -44,9 +44,20 @@ public class UFServiceImpl implements UFService{
     }
 
     @Override
-    public Page<UFDto> listarUF(Pageable paginacao) {
-        Page<UF> uf = ufRepository.findAll(paginacao);
+    public Page<UFDto> listarUF(Pageable paginacao, String codigoUF, Sigla sigla) {
+        Page<UF> uf;
+
+        if(codigoUF != null){
+          uf = ufRepository.findByCodigoUF(paginacao, Long.valueOf(codigoUF));
+
+        }else if(sigla != null){
+          uf = ufRepository.findBySigla(paginacao, sigla);
+        } else{
+          uf = ufRepository.findAll(paginacao);
+
+        }
         Page<UFDto> ufDto = new PageImpl<>(uf.stream().map(e -> modelMapper.map(e, UFDto.class)).collect(Collectors.toList()));
+
         return ufDto;
     }
 

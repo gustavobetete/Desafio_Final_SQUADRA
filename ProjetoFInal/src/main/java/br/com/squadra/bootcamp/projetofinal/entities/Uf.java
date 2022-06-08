@@ -25,6 +25,6 @@ public class UF {
     private Sigla sigla;
     private int status;
 
-//    @OneToMany(mappedBy = "uf")
-//    private List<Municipio> municipio;
+    @OneToMany(mappedBy = "uf")
+    private List<Municipio> municipio;
 }

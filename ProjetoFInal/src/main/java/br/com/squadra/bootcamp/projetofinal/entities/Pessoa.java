@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "TB_PESSOA")
 @Data
@@ -29,4 +30,7 @@ public class Pessoa {
     private String senha;
 
     private int status;
+
+    @OneToMany(mappedBy = "pessoas")
+    private List<Endereco> enderecos;
 }

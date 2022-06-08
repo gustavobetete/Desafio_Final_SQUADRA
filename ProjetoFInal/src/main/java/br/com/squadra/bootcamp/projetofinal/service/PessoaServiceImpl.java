@@ -7,17 +7,17 @@ import br.com.squadra.bootcamp.projetofinal.entities.Endereco;
 import br.com.squadra.bootcamp.projetofinal.entities.Municipio;
 import br.com.squadra.bootcamp.projetofinal.entities.Pessoa;
 import br.com.squadra.bootcamp.projetofinal.entities.UF;
-import br.com.squadra.bootcamp.projetofinal.repository.EnderecoRepository;
-import br.com.squadra.bootcamp.projetofinal.repository.MunicipioRepository;
-import br.com.squadra.bootcamp.projetofinal.repository.PessoaRepository;
-import br.com.squadra.bootcamp.projetofinal.repository.UFRepository;
+import br.com.squadra.bootcamp.projetofinal.repository.*;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +29,12 @@ public class PessoaServiceImpl implements PessoaService{
     @Autowired
     private PessoaRepository pessoaRepository;
 
+    @Autowired
+    private EnderecoRepository enderecoRepository;
+
+    @Autowired
+    private BairroRepository bairroRepository;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -38,7 +44,9 @@ public class PessoaServiceImpl implements PessoaService{
         Pessoa pessoa = modelMapper.map(pessoaFormDto, Pessoa.class);
         pessoa.setNome(pessoa.getNome().toUpperCase());
         pessoa.setSobrenome(pessoa.getSobrenome().toUpperCase());
+        List<Endereco> enderecos = pessoaFormDto.getEnderecos();
 
+        enderecoRepository.saveAll(enderecos);
         Optional<Pessoa> optionalPessoa = pessoaRepository.findByLogin(pessoa.getLogin());
         if(optionalPessoa.isPresent()){
             throw new UnauthorizedExceptions("Já existe um usuario com o nome " + pessoa.getLogin() + ". Você não pode cadastrar dois usuarios com o mesmo nome.");
@@ -75,5 +83,13 @@ public class PessoaServiceImpl implements PessoaService{
         this.pessoaRepository.delete(pessoa);
         List<Pessoa> listaPessoa = pessoaRepository.findAll();
         return listaPessoa.stream().map(e -> modelMapper.map(e, PessoaDto.class)).toList();
+    }
+
+    @Override
+    public PessoaEnderecoDto listarId(Long codigoPessoa){
+
+        Pessoa pessoa = this.pessoaRepository.findById(codigoPessoa)
+                .orElseThrow(() -> new ObjectNotFoundExceptions( "Pessoa não encontrado"));
+        return modelMapper.map(pessoa, PessoaEnderecoDto.class);
     }
 }

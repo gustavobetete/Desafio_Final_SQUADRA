@@ -36,8 +36,9 @@ public class UFController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<UFDto>> listarUF(@PageableDefault(sort = "codigoUF", direction = Sort.Direction.ASC) Pageable paginacao){
-        return ResponseEntity.ok().body(ufService.listarUF(paginacao));
+    public ResponseEntity<Page<UFDto>> listarUF(@PageableDefault(sort = "codigoUF", direction = Sort.Direction.ASC) Pageable paginacao
+            , @RequestParam(required = false) String codigoUF, @RequestParam(required = false) Sigla sigla){
+        return ResponseEntity.ok().body(ufService.listarUF(paginacao, codigoUF, sigla));
     }
 
     @PutMapping

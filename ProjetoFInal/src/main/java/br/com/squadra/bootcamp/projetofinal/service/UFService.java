@@ -13,7 +13,7 @@ import java.util.List;
 public interface UFService {
 
     List<UFDto> inserir(UFFormDto ufFormDto);
-    Page<UFDto> listarUF(Pageable paginacao);
+    Page<UFDto> listarUF(Pageable paginacao, String codigoUF, Sigla sigla);
 
     List<UFDto> atualizar(UFFormAtualizarDto ufFormDto);
 

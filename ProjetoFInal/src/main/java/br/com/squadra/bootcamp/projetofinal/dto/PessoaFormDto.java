@@ -1,5 +1,6 @@
 package br.com.squadra.bootcamp.projetofinal.dto;
 
+import br.com.squadra.bootcamp.projetofinal.entities.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -32,4 +34,6 @@ public class PessoaFormDto {
 
     @NotNull(message = "O campo status não pode ser nulo.")
     private int status;
+
+    private List<Endereco> enderecos;
 }

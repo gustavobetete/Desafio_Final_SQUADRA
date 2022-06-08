@@ -37,7 +37,7 @@ public class MunicipioServiceImpl implements MunicipioService{
     public List<MunicipioDto> inserir(MunicipioFormDto municipioFormDto) {
         Municipio municipio = modelMapper.map(municipioFormDto, Municipio.class);
         municipio.setNome(municipio.getNome().toUpperCase());
-        Optional<UF> uf = ufRepository.findByCodigoUF(municipio.getCodigoUF());
+        Optional<UF> uf = ufRepository.findByCodigoUF(municipio.getUf().getCodigoUF());
 
         Optional<Municipio> optionalMunicipio = municipioRepository.findByNome(municipio.getNome());
         if(optionalMunicipio.isPresent()){

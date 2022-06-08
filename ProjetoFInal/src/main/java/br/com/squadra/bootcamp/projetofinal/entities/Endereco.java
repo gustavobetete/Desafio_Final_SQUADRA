@@ -18,12 +18,6 @@ public class Endereco {
     @Column(name = "CODIGO_ENDERECO")
     private Long codigoEndereco;
 
-    @Column(name = "CODIGO_BAIRRO")
-    private Long codigoBairro;
-
-    @Column(name = "CODIGO_PESSOA")
-    private Long codigoPessoa;
-
     @Column(name = "NOME_RUA")
     private String nomeRua;
 
@@ -32,6 +26,14 @@ public class Endereco {
     private String complemento;
 
     private String cep;
+
+    @ManyToOne
+    @JoinColumn(name = "CODIGO_PESSOA")
+    private Pessoa pessoas;
+
+    @ManyToOne
+    @JoinColumn(name = "CODIGO_BAIRRO")
+    private Bairro bairros;
 
 
 

@@ -35,9 +35,11 @@ public class BairroServiceImpl implements BairroService{
 
     @Override
     public List<BairroDto> inserir(BairroFormDto bairroFormDto) {
+        Optional<Municipio> municipio = municipioRepository.findByCodigoMunicipio(bairroFormDto.getCodigoMunicipio());
         Bairro bairro = modelMapper.map(bairroFormDto, Bairro.class);
+
         bairro.setNome(bairro.getNome().toUpperCase());
-        Optional<Municipio> municipio = municipioRepository.findByCodigoMunicipio(bairro.getCodigoMunicipio());
+        bairro.setMunicipios(municipio.get());
 
         Optional<Bairro> optionalBairro = bairroRepository.findByNome(bairro.getNome());
         if(optionalBairro.isPresent()){
@@ -45,14 +47,26 @@ public class BairroServiceImpl implements BairroService{
         }
         bairroRepository.save(bairro);
         List<Bairro> listaBairro = bairroRepository.findAll();
-        return listaBairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).toList();
+        List<BairroDto> listaBairroDto = listaBairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).toList();
+        for(int i = 0; i < listaBairroDto.size(); i++){
+            listaBairroDto.get(i).setCodigoMunicipio(listaBairro.get(i).getMunicipios().getCodigoMunicipio());
+        }
+
+        return listaBairroDto;
     }
 
     @Override
     public Page<BairroDto> listarBairro(Pageable paginacao) {
         Page<Bairro> bairro = bairroRepository.findAll(paginacao);
-        Page<BairroDto> bairroDto = new PageImpl<>(bairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).collect(Collectors.toList()));
-        return bairroDto;
+//        Page<BairroDto> bairroDto = new PageImpl<>(bairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).collect(Collectors.toList()));
+//        return bairroDto;
+        List<Bairro> listaBairro = bairro.getContent();
+        List<BairroDto> listaBairroDto = listaBairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).toList();
+        for(int i = 0; i < listaBairroDto.size(); i++){
+            listaBairroDto.get(i).setCodigoMunicipio(listaBairro.get(i).getMunicipios().getCodigoMunicipio());
+        }
+
+        return new PageImpl<>(listaBairroDto);
     }
 
     @Override

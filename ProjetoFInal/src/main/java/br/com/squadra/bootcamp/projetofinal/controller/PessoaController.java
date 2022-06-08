@@ -1,6 +1,8 @@
 package br.com.squadra.bootcamp.projetofinal.controller;
 
+import br.com.squadra.bootcamp.projetofinal.config.objectNotFound.ObjectNotFoundExceptions;
 import br.com.squadra.bootcamp.projetofinal.dto.*;
+import br.com.squadra.bootcamp.projetofinal.entities.Pessoa;
 import br.com.squadra.bootcamp.projetofinal.service.PessoaService;
 import br.com.squadra.bootcamp.projetofinal.service.UFService;
 import lombok.RequiredArgsConstructor;
@@ -45,5 +47,10 @@ public class PessoaController {
     @DeleteMapping(path = "/{codigoPessoa}")
     public ResponseEntity<List<PessoaDto>> delete(@PathVariable Long codigoPessoa) {
         return ResponseEntity.ok().body(pessoaService.delete(codigoPessoa));
+    }
+
+    @GetMapping("/{codigoPessoa}")
+    public ResponseEntity<PessoaEnderecoDto> listarId(@PathVariable Long codigoPessoa){
+        return ResponseEntity.ok().body(pessoaService.listarId(codigoPessoa));
     }
 }

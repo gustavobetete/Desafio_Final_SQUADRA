@@ -4,19 +4,24 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BairroDto {
+public class EnderecoPostDto {
+
+    private Long codigoEndereco;
 
     private Long codigoBairro;
 
-    private Long codigoMunicipio;
+    private Long codigoPessoa;
 
-    private String nome;
+    private String nomeRua;
 
-    private int status;
+    private int numero;
+
+    private String complemento;
+
+    private String cep;
+
 
 }

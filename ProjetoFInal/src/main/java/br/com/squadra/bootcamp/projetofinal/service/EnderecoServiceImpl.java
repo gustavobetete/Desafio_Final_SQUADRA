@@ -1,15 +1,15 @@
 package br.com.squadra.bootcamp.projetofinal.service;
 
 import br.com.squadra.bootcamp.projetofinal.config.objectNotFound.ObjectNotFoundExceptions;
-import br.com.squadra.bootcamp.projetofinal.config.unauthorized.UnauthorizedExceptions;
-import br.com.squadra.bootcamp.projetofinal.dto.*;
+import br.com.squadra.bootcamp.projetofinal.dto.EnderecoDto;
+import br.com.squadra.bootcamp.projetofinal.dto.EnderecoFormAtualizarDto;
+import br.com.squadra.bootcamp.projetofinal.dto.EnderecoFormDto;
 import br.com.squadra.bootcamp.projetofinal.entities.Bairro;
 import br.com.squadra.bootcamp.projetofinal.entities.Endereco;
-import br.com.squadra.bootcamp.projetofinal.entities.Municipio;
-import br.com.squadra.bootcamp.projetofinal.entities.UF;
+import br.com.squadra.bootcamp.projetofinal.entities.Pessoa;
 import br.com.squadra.bootcamp.projetofinal.repository.BairroRepository;
 import br.com.squadra.bootcamp.projetofinal.repository.EnderecoRepository;
-import br.com.squadra.bootcamp.projetofinal.repository.MunicipioRepository;
+import br.com.squadra.bootcamp.projetofinal.repository.PessoaRepository;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +28,12 @@ public class EnderecoServiceImpl implements EnderecoService {
     @Autowired
     private EnderecoRepository enderecoRepository;
 
-//    @Autowired
-//    private MunicipioRepository municipioRepository;
+    @Autowired
+    private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private BairroRepository bairroRepository;
+
 
     @Autowired
     private ModelMapper modelMapper;
@@ -38,6 +42,10 @@ public class EnderecoServiceImpl implements EnderecoService {
     public List<EnderecoDto> inserir(EnderecoFormDto enderecoFormDto) {
         Endereco endereco = modelMapper.map(enderecoFormDto, Endereco.class);
         endereco.setNomeRua(endereco.getNomeRua().toUpperCase());
+        Pessoa pessoa = pessoaRepository.getById(enderecoFormDto.getCodigoPessoa());
+        Bairro bairro = bairroRepository.getById(enderecoFormDto.getCodigoBairro());
+        endereco.setPessoas(pessoa);
+        endereco.setBairros(bairro);
         enderecoRepository.save(endereco);
         List<Endereco> listaEndereco = enderecoRepository.findAll();
         return listaEndereco.stream().map(e -> modelMapper.map(e, EnderecoDto.class)).toList();

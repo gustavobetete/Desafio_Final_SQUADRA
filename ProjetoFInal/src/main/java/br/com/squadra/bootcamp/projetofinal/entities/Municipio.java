@@ -1,14 +1,14 @@
 package br.com.squadra.bootcamp.projetofinal.entities;
 
 import br.com.squadra.bootcamp.projetofinal.constants.Sigla;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "TB_MUNICIPIO")
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class Municipio {
@@ -19,13 +19,14 @@ public class Municipio {
     @Column(name = "CODIGO_MUNICIPIO")
     private Long codigoMunicipio;
 
-    @Column(name = "CODIGO_UF")
-    private Long codigoUF;
-
     private String nome;
 
     private int status;
 
-//    @ManyToOne
-//    private UF uf;
+    @OneToMany(mappedBy = "municipios")
+    private List<Bairro> bairros;
+
+    @ManyToOne
+    @JoinColumn(name = "CODIGO_UF")
+    private UF uf;
 }

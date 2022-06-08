@@ -1,6 +1,7 @@
 package br.com.squadra.bootcamp.projetofinal.service;
 
 import br.com.squadra.bootcamp.projetofinal.dto.PessoaDto;
+import br.com.squadra.bootcamp.projetofinal.dto.PessoaEnderecoDto;
 import br.com.squadra.bootcamp.projetofinal.dto.PessoaFormAtualizarDto;
 import br.com.squadra.bootcamp.projetofinal.dto.PessoaFormDto;
 import org.springframework.data.domain.Page;
@@ -17,4 +18,6 @@ public interface PessoaService {
     List<PessoaDto> atualizar(PessoaFormAtualizarDto pessoaFormAtualizarDto);
 
     List<PessoaDto> delete(Long codigoPessoa);
+
+    PessoaEnderecoDto listarId(Long codigoPessoa);
 }
