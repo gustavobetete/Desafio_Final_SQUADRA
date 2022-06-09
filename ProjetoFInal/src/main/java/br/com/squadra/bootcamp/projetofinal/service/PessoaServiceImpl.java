@@ -48,7 +48,7 @@ public class PessoaServiceImpl implements PessoaService{
         //exceptions personalizada caso exista um usario com o mesmo nome.
         Optional<Pessoa> optionalPessoa = pessoaRepository.findByLogin(pessoa.getLogin());
         if(optionalPessoa.isPresent()){
-            throw new UnauthorizedExceptions("Já existe um usuario com o nome " + pessoa.getLogin() + ". Você não pode cadastrar dois usuarios com o mesmo nome.");
+            throw new UnauthorizedExceptions("Já existe um usuario com o login " + pessoa.getLogin() + ". Você não pode cadastrar dois usuarios com o mesmo login.");
         }
 
         pessoaRepository.save(pessoa);

@@ -23,8 +23,8 @@ public class Bairro {
 
     private int status;
 
-    @OneToMany(mappedBy = "bairros")
-    private List<Endereco> endereco;
+    @OneToOne(mappedBy = "bairro")
+    private Endereco endereco;
 
     @ManyToOne
     @JoinColumn(name = "CODIGO_MUNICIPIO")

@@ -49,8 +49,8 @@ public class PessoaController {
         return ResponseEntity.ok().body(pessoaService.delete(codigoPessoa));
     }
 
-    @GetMapping(path = "/{codigoPessoa}")
-    public ResponseEntity<PessoaGetDto> listarCodigoPessoa(@PathVariable Long codigoPessoa){
+    @GetMapping(params = "codigoPessoa")
+    public ResponseEntity<PessoaGetDto> listarCodigoPessoa(@RequestParam Long codigoPessoa){
         return ResponseEntity.ok().body(pessoaService.listarCodigoPessoa(codigoPessoa));
     }
 }

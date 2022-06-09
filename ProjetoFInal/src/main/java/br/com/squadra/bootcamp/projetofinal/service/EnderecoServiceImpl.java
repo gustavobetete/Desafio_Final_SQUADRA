@@ -45,7 +45,7 @@ public class EnderecoServiceImpl implements EnderecoService {
         Pessoa pessoa = pessoaRepository.getById(enderecoFormDto.getCodigoPessoa());
         Bairro bairro = bairroRepository.getById(enderecoFormDto.getCodigoBairro());
         endereco.setPessoas(pessoa);
-        endereco.setBairros(bairro);
+        endereco.setBairro(bairro);
         enderecoRepository.save(endereco);
         List<Endereco> listaEndereco = enderecoRepository.findAll();
         return listaEndereco.stream().map(e -> modelMapper.map(e, EnderecoDto.class)).toList();

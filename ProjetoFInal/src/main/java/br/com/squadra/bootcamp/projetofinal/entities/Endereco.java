@@ -31,9 +31,9 @@ public class Endereco {
     @JoinColumn(name = "CODIGO_PESSOA")
     private Pessoa pessoas;
 
-    @ManyToOne
-    @JoinColumn(name = "CODIGO_BAIRRO")
-    private Bairro bairros;
+    @OneToOne
+    @JoinColumn(name = "CODIGO_BAIRRO", referencedColumnName = "CODIGO_BAIRRO")
+    private Bairro bairro;
 
 
 

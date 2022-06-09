@@ -17,6 +17,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,13 +38,15 @@ public class MunicipioServiceImpl implements MunicipioService{
     public List<MunicipioDto> inserir(MunicipioFormDto municipioFormDto) {
         Municipio municipio = modelMapper.map(municipioFormDto, Municipio.class);
         municipio.setNome(municipio.getNome().toUpperCase());
-        Optional<UF> uf = ufRepository.findByCodigoUF(municipio.getUf().getCodigoUF());
+        UF uf = modelMapper.map(ufRepository.findByCodigoUF(municipio.getUf().getCodigoUF()), UF.class);
 
         Optional<Municipio> optionalMunicipio = municipioRepository.findByNome(municipio.getNome());
         if(optionalMunicipio.isPresent()){
             throw new UnauthorizedExceptions("Já existe um municipio com o nome " + municipio.getNome() + ". Você não pode cadastrar dois municipio com o mesmo nome.");
         }
         municipioRepository.save(municipio);
+        uf.setMunicipio(municipio.getUf().getMunicipio());
+
         List<Municipio> listaMunicipio = municipioRepository.findAll();
         return listaMunicipio.stream().map(e -> modelMapper.map(e, MunicipioDto.class)).toList();
     }
