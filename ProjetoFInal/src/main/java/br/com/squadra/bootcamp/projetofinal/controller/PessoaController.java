@@ -34,7 +34,7 @@ public class PessoaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<PessoaDto>> listarPessoa(@PageableDefault(sort = "codigoPessoa", direction = Sort.Direction.ASC) Pageable paginacao){
+    public ResponseEntity<List<PessoaDto>> listarPessoa(@PageableDefault(sort = "codigoPessoa", direction = Sort.Direction.ASC) Pageable paginacao){
         return ResponseEntity.ok().body(pessoaService.listarPessoa(paginacao));
     }
 
@@ -49,8 +49,8 @@ public class PessoaController {
         return ResponseEntity.ok().body(pessoaService.delete(codigoPessoa));
     }
 
-    @GetMapping("/{codigoPessoa}")
-    public ResponseEntity<PessoaEnderecoDto> listarId(@PathVariable Long codigoPessoa){
-        return ResponseEntity.ok().body(pessoaService.listarId(codigoPessoa));
+    @GetMapping(path = "/{codigoPessoa}")
+    public ResponseEntity<PessoaGetDto> listarCodigoPessoa(@PathVariable Long codigoPessoa){
+        return ResponseEntity.ok().body(pessoaService.listarCodigoPessoa(codigoPessoa));
     }
 }

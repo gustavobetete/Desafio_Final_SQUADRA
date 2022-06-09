@@ -1,16 +1,15 @@
 package br.com.squadra.bootcamp.projetofinal.dto;
 
-import br.com.squadra.bootcamp.projetofinal.entities.Endereco;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PessoaDto {
+public class PessoaGetDto {
 
     private Long codigoPessoa;
 
@@ -24,8 +23,7 @@ public class PessoaDto {
 
     private String senha;
 
-    private List<EnderecoDto> enderecos;
+    private List<EnderecoGetDto> enderecos;
 
     private int status;
-
 }

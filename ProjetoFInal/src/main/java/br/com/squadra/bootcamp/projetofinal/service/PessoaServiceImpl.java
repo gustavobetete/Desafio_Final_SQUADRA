@@ -3,10 +3,7 @@ package br.com.squadra.bootcamp.projetofinal.service;
 import br.com.squadra.bootcamp.projetofinal.config.objectNotFound.ObjectNotFoundExceptions;
 import br.com.squadra.bootcamp.projetofinal.config.unauthorized.UnauthorizedExceptions;
 import br.com.squadra.bootcamp.projetofinal.dto.*;
-import br.com.squadra.bootcamp.projetofinal.entities.Endereco;
-import br.com.squadra.bootcamp.projetofinal.entities.Municipio;
-import br.com.squadra.bootcamp.projetofinal.entities.Pessoa;
-import br.com.squadra.bootcamp.projetofinal.entities.UF;
+import br.com.squadra.bootcamp.projetofinal.entities.*;
 import br.com.squadra.bootcamp.projetofinal.repository.*;
 import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
@@ -47,20 +44,23 @@ public class PessoaServiceImpl implements PessoaService{
         List<Endereco> enderecos = pessoaFormDto.getEnderecos();
 
         enderecoRepository.saveAll(enderecos);
+
+        //exceptions personalizada caso exista um usario com o mesmo nome.
         Optional<Pessoa> optionalPessoa = pessoaRepository.findByLogin(pessoa.getLogin());
         if(optionalPessoa.isPresent()){
             throw new UnauthorizedExceptions("Já existe um usuario com o nome " + pessoa.getLogin() + ". Você não pode cadastrar dois usuarios com o mesmo nome.");
         }
+
         pessoaRepository.save(pessoa);
         List<Pessoa> listaPessoa = pessoaRepository.findAll();
         return listaPessoa.stream().map(e -> modelMapper.map(e, PessoaDto.class)).toList();
     }
 
     @Override
-    public Page<PessoaDto> listarPessoa(Pageable paginacao) {
-        Page<Pessoa> pessoa = pessoaRepository.findAll(paginacao);
-        Page<PessoaDto> pessoaDto = new PageImpl<>(pessoa.stream().map(e -> modelMapper.map(e, PessoaDto.class)).collect(Collectors.toList()));
-        return pessoaDto;
+    public List<PessoaDto> listarPessoa(Pageable paginacao) {
+        Page<Pessoa> pessoas = pessoaRepository.findAll(paginacao);
+        Page<PessoaDto> pessoaDto = new PageImpl<>(pessoas.stream().map(e -> modelMapper.map(e, PessoaDto.class)).collect(Collectors.toList()));
+        return pessoaDto.getContent();
     }
 
     @Override
@@ -86,10 +86,11 @@ public class PessoaServiceImpl implements PessoaService{
     }
 
     @Override
-    public PessoaEnderecoDto listarId(Long codigoPessoa){
+    public PessoaGetDto listarCodigoPessoa(Long codigoPessoa){
 
         Pessoa pessoa = this.pessoaRepository.findById(codigoPessoa)
                 .orElseThrow(() -> new ObjectNotFoundExceptions( "Pessoa não encontrado"));
-        return modelMapper.map(pessoa, PessoaEnderecoDto.class);
+        return modelMapper.map(pessoa, PessoaGetDto.class);
+
     }
 }
