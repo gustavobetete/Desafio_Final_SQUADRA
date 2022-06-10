@@ -35,5 +35,5 @@ public class PessoaFormDto {
     @NotNull(message = "O campo status não pode ser nulo.")
     private int status;
 
-    private List<Endereco> enderecos;
+    private List<ENDERECODTOULTIMO> enderecos;
 }

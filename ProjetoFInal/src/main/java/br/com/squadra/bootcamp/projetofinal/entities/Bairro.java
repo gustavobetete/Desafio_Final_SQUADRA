@@ -23,7 +23,7 @@ public class Bairro {
 
     private int status;
 
-    @OneToOne(mappedBy = "bairro")
+    @OneToOne(mappedBy = "bairro", cascade = CascadeType.PERSIST)
     private Endereco endereco;
 
     @ManyToOne

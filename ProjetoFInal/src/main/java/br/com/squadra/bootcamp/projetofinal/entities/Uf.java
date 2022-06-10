@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.List;
 
 @Entity(name = "TB_UF")
@@ -25,6 +24,6 @@ public class UF {
     private Sigla sigla;
     private int status;
 
-    @OneToMany(mappedBy = "uf")
+    @OneToMany(mappedBy = "uf", cascade = CascadeType.PERSIST)
     private List<Municipio> municipio;
 }

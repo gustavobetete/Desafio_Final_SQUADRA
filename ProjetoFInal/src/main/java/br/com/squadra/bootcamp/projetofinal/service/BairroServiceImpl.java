@@ -37,15 +37,15 @@ public class BairroServiceImpl implements BairroService{
     public List<BairroDto> inserir(BairroFormDto bairroFormDto) {
         Bairro bairro = modelMapper.map(bairroFormDto, Bairro.class);
         bairro.setNome(bairro.getNome().toUpperCase());
-        Municipio municipio = modelMapper.map(municipioRepository.findByCodigoMunicipio(bairro.getMunicipios().getCodigoMunicipio()), Municipio.class);
-
+        Municipio municipio = municipioRepository.findByCodigoMunicipio(bairroFormDto.getCodigoMunicipio()).get();
+        bairro.setMunicipios(municipio);
         Optional<Bairro> optionalBairro = bairroRepository.findByNome(bairro.getNome());
         if(optionalBairro.isPresent()){
             throw new UnauthorizedExceptions("Já existe um bairro com o nome " + bairro.getNome() + ". Você não pode cadastrar dois bairros com o mesmo nome.");
         }
         bairroRepository.save(bairro);
         municipio.setBairros(bairro.getMunicipios().getBairros());
-
+        municipioRepository.save(municipio);
         List<Bairro> listaBairro = bairroRepository.findAll();
         List<BairroDto> listaBairroDto = listaBairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).toList();
         for(int i = 0; i < listaBairroDto.size(); i++){
@@ -53,6 +53,7 @@ public class BairroServiceImpl implements BairroService{
         }
 
         return listaBairroDto;
+       // return listaBairro.stream().map(e -> modelMapper.map(e, BairroDto.class)).toList();
     }
 
     @Override

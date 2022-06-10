@@ -23,7 +23,7 @@ public class Municipio {
 
     private int status;
 
-    @OneToMany(mappedBy = "municipios")
+    @OneToMany(mappedBy = "municipios", cascade = CascadeType.PERSIST)
     private List<Bairro> bairros;
 
     @ManyToOne
