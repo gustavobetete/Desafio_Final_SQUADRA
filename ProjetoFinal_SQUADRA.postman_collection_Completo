@@ -1,0 +1,457 @@
+{
+	"info": {
+		"_postman_id": "20eb7b71-83b3-46be-8a41-b4ee02a82e92",
+		"name": "ProjetoFinal_SQUADRA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20744682"
+	},
+	"item": [
+		{
+			"name": "UF",
+			"item": [
+				{
+					"name": "ListarUF",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/uf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"uf"
+							],
+							"query": [
+								{
+									"key": "codigoUF",
+									"value": "2",
+									"disabled": true
+								},
+								{
+									"key": "sigla",
+									"value": "RJ",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "inserirUF",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"ACRE\",\r\n    \"sigla\": \"AC\",\r\n    \"status\": 1\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/uf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"uf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarUF",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoUF\": 2,\r\n\t\"nome\": \"Pará\",\r\n\t\"sigla\": \"PA\",\r\n\t\"status\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/uf",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"uf"
+							],
+							"query": [
+								{
+									"key": "codigoUF",
+									"value": "17",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarUF",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/uf/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"uf",
+								"3"
+							],
+							"query": [
+								{
+									"key": "codigoUF",
+									"value": "17",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Municipio",
+			"item": [
+				{
+					"name": "ListarMunicipio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/municipio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InserirMunicipio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"codigoUF\": 2,\r\n\t\"nome\": \"Acrelândia\",\r\n\t\"status\": 1\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/municipio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarMunicipio",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoMunicipio\": 6,\r\n    \"codigoUF\": 1,\r\n    \"nome\": \"JUNDIAÍ\",\r\n    \"status\": 1\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/municipio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"municipio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarMunicipio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/municipio/6",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"municipio",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bairro",
+			"item": [
+				{
+					"name": "ListarBairro",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bairro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bairro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InserirBairro",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoMunicipio\": 4,\r\n    \"nome\": \"Jardim Maju\",\r\n    \"status\": 1\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/bairro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bairro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarBairro",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"codigoBairro\": 9,\r\n    \"codigoMunicipio\": 4,\r\n    \"nome\": \"Ypepinheiros\",\r\n    \"status\": 1\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/bairro",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bairro"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarBairro",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/bairro/18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bairro",
+								"18"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pessoa",
+			"item": [
+				{
+					"name": "ListarPessoa",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pessoa?codigoPessoa=9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa"
+							],
+							"query": [
+								{
+									"key": "codigoPessoa",
+									"value": "9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "InserirPessoa",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Wanderlucio\",\r\n    \"sobrenome\": \"Alves\",\r\n    \"idade\": 32,\r\n    \"login\": \"Wanderlucio\",\r\n    \"senha\": \"wander123\",\r\n    \"enderecos\": [\r\n    {\r\n      \"codigoBairro\": 5,\r\n      \"nomeRua\": \"RUA Teste\",\r\n      \"numero\": \"123\",\r\n      \"complemento\": \"MINHA CASA UM\",\r\n      \"cep\": \"11111-678\"\r\n    },\r\n    {\r\n      \"codigoBairro\": 6,\r\n      \"nomeRua\": \"RUA TESTE\",\r\n      \"numero\": \"456\",\r\n      \"complemento\": \"MINHA CASA DOIS\",\r\n      \"cep\": \"22222-680\"\r\n    }\r\n    ],\r\n    \"status\": 1\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/pessoa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa"
+							],
+							"query": [
+								{
+									"key": "codigoPessoa",
+									"value": "5",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AtualizarPessoa",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Wanderlucio\",\r\n    \"sobrenome\": \"Alves\",\r\n    \"idade\": 32,\r\n    \"login\": \"Wanderlucio\",\r\n    \"senha\": \"wander123\",\r\n    \"enderecos\": [\r\n    {\r\n      \"codigoBairro\": 5,\r\n      \"nomeRua\": \"RUA Teste\",\r\n      \"numero\": \"123\",\r\n      \"complemento\": \"MINHA CASA UM\",\r\n      \"cep\": \"11111-678\"\r\n    },\r\n    {\r\n      \"codigoBairro\": 6,\r\n      \"nomeRua\": \"RUA TESTE\",\r\n      \"numero\": \"456\",\r\n      \"complemento\": \"MINHA CASA DOIS\",\r\n      \"cep\": \"22222-680\"\r\n    }\r\n    ],\r\n    \"status\": 1\r\n  }"
+						},
+						"url": {
+							"raw": "http://localhost:8080/pessoa",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeletarPessoa",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/pessoa/22",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"pessoa",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
